@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "skills": {
+    "advanced-analytics-dashboard": {
+      "source": "sickn33/agentic-awesome-skills",
+      "commit": "444f05edf05566b0880ad34e8eba6e9034905483",
+      "sourceType": "github",
+      "skillPath": "skills/advanced-analytics-dashboard/SKILL.md",
+      "computedHash": "9c9251c5ecb76f94c74382dd99d69d61aff014b83c6f68db9461e07c18d2f081"
+    },
+    "dashboard-design": {
+      "source": "abdiraimov-otabek/dashboard-design-skill",
+      "commit": "463b8fdf62c640180ec1ba731f3616c2319bf68c",
+      "sourceType": "github",
+      "skillPath": "skills/dashboard-design/SKILL.md",
+      "computedHash": "785d12f28f9c16b48a4167676d6485830a647b01e0934a4ce53f0ea14cd7a4b1"
+    },
+    "data-dashboard": {
+      "source": "plugin87/ux-ui-agent-skills",
+      "commit": "d0ee2fa38edea5eba0b3d3a4a43f6b7e9ab923a6",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/data-dashboard/SKILL.md",
+      "computedHash": "c225fe78aff8fe52c3914d48cf12ce059c3fc40c731dd7af1dfca3bb0bb67bfe"
+    },
+    "data-storytelling": {
+      "source": "wshobson/agents",
+      "commit": "42203085cfc5736204bf0f6d436dff7e1da0bf3f",
+      "sourceType": "github",
+      "skillPath": "plugins/business-analytics/skills/data-storytelling/SKILL.md",
+      "computedHash": "ddf010accb6f29bb6c751f216b6423af74d20c025b4188762d25c1e71081af01"
+    },
+    "kpi-dashboard-design": {
+      "source": "wshobson/agents",
+      "commit": "42203085cfc5736204bf0f6d436dff7e1da0bf3f",
+      "sourceType": "github",
+      "skillPath": "plugins/business-analytics/skills/kpi-dashboard-design/SKILL.md",
+      "computedHash": "2ef14e74c531b56105ec44299b71fca9ecd43ae0ce6f393b5a1c7f97b2b3da90"
+    },
+    "sn-da-excel-workflow": {
+      "source": "OpenSenseNova/SenseNova-Skills",
+      "commit": "07e7ff8c4bdfd7b79e7402fe94af59d2a5a9749b",
+      "sourceType": "github",
+      "skillPath": "skills/sn-da-excel-workflow/SKILL.md",
+      "computedHash": "064a3101f9bd95e5674fefe1b59d97843d7482f18b31963ff1d21ae10900cbaf"
+    },
+    "xlsx": {
+      "source": "anthropics/skills",
+      "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourceType": "github",
+      "skillPath": "skills/xlsx/SKILL.md",
+      "computedHash": "5100b54957a73ce2cb55933b224a483793f5f71555a181f287f43f94a9c1e149"
+    }
+  }
+}

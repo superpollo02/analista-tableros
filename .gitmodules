@@ -1,0 +1,3 @@
+[submodule "rhp"]
+	path = rhp
+	url = https://github.com/bezda-team/rhp.git
