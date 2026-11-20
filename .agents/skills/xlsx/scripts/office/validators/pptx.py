@@ -5,6 +5,8 @@ Validator for PowerPoint presentation XML files against XSD schemas.
 import re
 from pathlib import Path
 
+import lxml.etree
+
 from helpers import opc_target, rels_source_part, safe_extract
 
 from .base import BaseSchemaValidator
@@ -97,8 +99,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
         print(one_line(text, limit))
 
     def _listed_slides(self) -> set[str] | None:
-        import lxml.etree
-
         from helpers import SLIDE_REL_TYPE
 
         r_id = f"{{{self.OFFICE_RELATIONSHIPS_NAMESPACE}}}id"
@@ -135,8 +135,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
 
     def validate_tags(self):
         from collections import Counter
-
-        import lxml.etree
 
         ns = {"p": self.PRESENTATIONML_NAMESPACE, "mc": self.MC_NAMESPACE}
         r_id = f"{{{self.OFFICE_RELATIONSHIPS_NAMESPACE}}}id"
@@ -236,8 +234,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
         return found
 
     def validate_slides(self):
-        import lxml.etree
-
         from helpers.pptx_slide import (
             SLIDE_PART_RE,
             fatal_slide_errors,
@@ -302,8 +298,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
         if xml_file.parent.name == "charts" and xml_file.name.startswith("chart"):
             return None
         if xml_file.parent.name == "ppt" and xml_file.suffix == ".xml":
-            import lxml.etree
-
             try:
                 root = lxml.etree.parse(str(xml_file)).getroot()
             except (lxml.etree.XMLSyntaxError, OSError):
@@ -334,8 +328,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
         return xml_doc
 
     def validate_uuid_ids(self):
-        import lxml.etree
-
         errors = []
         uuid_pattern = re.compile(
             r"^[\{\(]?[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?[0-9A-Fa-f]{4}-?[0-9A-Fa-f]{4}-?[0-9A-Fa-f]{12}[\}\)]?$"
@@ -376,8 +368,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
         return len(clean_value) == 32 and all(c.isalnum() for c in clean_value)
 
     def validate_slide_layout_ids(self):
-        import lxml.etree
-
         errors = []
 
         slide_masters = list(self.unpacked_dir.glob("ppt/slideMasters/*.xml"))
@@ -444,8 +434,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
             return True
 
     def validate_no_duplicate_slide_layouts(self):
-        import lxml.etree
-
         errors = []
         slide_rels_files = list(self.unpacked_dir.glob("ppt/slides/_rels/*.xml.rels"))
 
@@ -482,8 +470,6 @@ class PPTXSchemaValidator(BaseSchemaValidator):
             return True
 
     def validate_notes_slide_references(self):
-        import lxml.etree
-
         errors = []
         notes_slide_references = {}  
 
