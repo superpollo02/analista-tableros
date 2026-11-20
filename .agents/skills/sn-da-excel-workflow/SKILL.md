@@ -99,6 +99,13 @@ df[col] = df[col].apply(clean_text)
 Use vectorized operations or `np.where()` instead. See `sn-da-large-file-analysis` skill
 for the vectorized cheat sheet.
 
+#### Saneamiento Específico para Planillas Institucionales del Sector Público
+Al procesar planillas administrativas u hospitalarias de carga manual o descentralizada:
+1. **Duración:** Extraer valores flotantes admitiendo cadenas (`"hs reloj"`, `"horas"`), formatos horarios `HH:MM:SS` (convertir a horas decimales) y días (asumir jornada de 6 hs hábiles salvo indicación expresa).
+2. **Fechas:** Validar el rango de año `[2020, 2030]`. Corregir automáticamente errores de tipeo de 5 dígitos (ej. `20206-05-19` -> `2026-05-19`). Si la fecha es textual o aproximada (`"11 de Mayo aprox."`), marcar como `Fecha estimada`.
+3. **Cupos y Capacidades:** Resolver rangos `min-max` mediante el promedio `(min + max) / 2`.
+4. **Data Honesty en Campos de Cierre:** Preservar `None`/`NaN` para campos ausentes (como `Cantidad de Asistentes`, `Cantidad de Aprobados` o `N° de Resolución`); nunca rellenar con ceros ficticios (`$0`, `0%`).
+
 → capabilities:
   - `excel-data-cleaning/missing-value-handling`
   - `excel-data-cleaning/invalid-data-cleaning`
