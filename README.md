@@ -2,9 +2,20 @@
 
 Este espacio de trabajo está optimizado para el análisis avanzado de datos, la ingeniería y saneamiento de hojas de cálculo, la arquitectura de métricas de negocio y el diseño de interfaces/tableros de monitoreo con los más altos estándares de honestidad de datos (*Data Honesty*), jerarquía visual y comunicación ejecutiva (*Data Storytelling*).
 
+> 📖 **Documentación:** Para consultar la guía paso a paso de los agentes, recetario de prompts y checklist de calidad, revisa el [Manual de Uso Operativo](MANUAL_DE_USO.md).
+
 ---
 
-## Índice de Habilidades Locales
+## Índice de Habilidades y Agentes
+
+### Agentes Especializados
+
+| Agente | Enfoque Principal | Responsabilidad Central |
+| :--- | :--- | :--- |
+| **`data-analyst`** | Rigor Matemático y Calidad | Auditoría de fuentes, saneamiento masivo, detección de anomalías y validación estadística. |
+| **`dashboard-designer`** | UI/UX & Data Honesty | Arquitectura visual silenciosa (*wordless*), componentes vectoriales y eliminación de sesgos gráficos. |
+
+### Habilidades Locales (Skills)
 
 | Habilidad / Skill | Categoría | Enlace directo |
 | :--- | :--- | :--- |
@@ -118,29 +129,104 @@ Este espacio de trabajo está optimizado para el análisis avanzado de datos, la
 
 ---
 
-## Flujo de Trabajo Recomendado
+---
+
+## Arquitectura del Pipeline y Funcionamiento del Ecosistema
+
+Este proyecto implementa un pipeline analítico integral que desacopla la responsabilidad del **rigor del dato**, la **gobernanza de métricas**, la **arquitectura visual** y la **narrativa estratégica**. A continuación se detalla cómo operan los agentes y habilidades de forma individual y cómo se orquestan en conjunto.
+
+---
+
+### 1. Agentes Especializados: Roles y Operación por Separado
+
+El ecosistema cuenta con dos perfiles de agentes autónomos, diseñados para intervenir en momentos específicos sin mezclar incumbencias:
+
+#### A. `data-analyst` (Data Analyst & BI Specialist)
+- **Misión individual:** Es el custodio del rigor matemático, la calidad y la veracidad de los datos antes de cualquier representación gráfica.
+- **Capacidades aisladas:**
+  - Perfilado profundo de esquemas, distribuciones estadísticas, nulos, duplicados y anomalías.
+  - Generación y optimización de consultas SQL analíticas (CTEs, funciones de ventana, particiones).
+  - Modelado de transformaciones masivas en memoria y pruebas de consistencia estadística.
+- **Límite de responsabilidad:** No diseña componentes visuales ni maquetas de interfaz; su trabajo concluye con datos limpios, tablas normalizadas y métricas auditadas.
+
+#### B. `dashboard-designer` / `dashboard-architect` (UI/UX & Data Honesty Specialist)
+- **Misión individual:** Especialista en arquitectura de información, diseño de consolas y tableros interactivos (Web React/Tailwind/HTML y SwiftUI/Swift Charts).
+- **Capacidades aisladas:**
+  - Maquetación con estricta jerarquía de escaneo en 3 segundos (`Visión general → Atención → Detalle → Acción`).
+  - Implementación del principio *wordless* (cero frases explicativas en la pantalla principal; todo el contexto reside en tooltips).
+  - Garantía de *Data Honesty*: sin ceros inventados, sin deltas porcentuales engañosos sobre muestras bajas (< 5) y con paletas monocromáticas o sobrias (rojo/ámbar reservado exclusivamente para problemas accionables).
+  - Alineación de números tabulares (`font-variant-numeric: tabular-nums`) y diseño responsivo para pantallas ultra-densas y móviles.
+- **Límite de responsabilidad:** Asume que los datos y fórmulas suministrados ya fueron reconciliados; no realiza limpieza cruda de archivos.
+
+---
+
+### 2. Habilidades Locales (Skills): Qué Hace Cada Una por Separado
+
+Cada habilidad funciona como un módulo independiente con herramientas y reglas propias, listo para activarse ante tareas puntuales:
+
+| Habilidad (Skill) | Rol Específico por Separado | Cuándo Invocarla en Solitario |
+| :--- | :--- | :--- |
+| **`sn-da-excel-workflow`** | Ingesta y saneamiento masivo de planillas | Cuando se necesita procesar archivos Excel grandes sin colapsar la memoria (bifurcación directa <10k filas, Parquet 10k–100k, streaming ≥100k), cruzar pestañas y filtrar nulos/anomalías. |
+| **`xlsx`** | Modelado, fórmulas nativas y auditoría Excel | Cuando el objetivo final es un archivo Excel vivo (`.xlsx`/`.xlsm`) con fórmulas automáticas (sin números hardcodeados), formateo financiero y validación con LibreOffice (`recalc.py`). |
+| **`advanced-analytics-dashboard`** | Catálogo formal y diccionario de métricas | Cuando se requiere documentar la ficha técnica de cada KPI (módulo origen, fórmula unívoca, granularidad, responsable, periodicidad) y exportar a DDL SQL, CSV o JSON Schema. |
+| **`kpi-dashboard-design`** | Selección y arquitectura conceptual de KPIs | Cuando se define la estructura de indicadores para un directorio o área operativa, seleccionando entre 5 y 7 métricas clave SMART para evitar sobrecarga cognitiva y resolver discrepancias de cálculo. |
+| **`dashboard-design`** | Reglas maestras de UI/UX y Data Honesty | Cuando se va a programar, auditar o refactorizar la estética de un dashboard web o móvil, aplicando principios de Tufte, Few y Knaflic para eliminar ruido decorativo. |
+| **`data-dashboard`** | Construcción de consolas densas en SVG puro | Cuando se necesita una consola técnica o terminal financiero con gráficos vectoriales dibujados desde tokens (velas japonesas, cascada, libro de órdenes, sparklines) sin librerías externas. |
+| **`data-storytelling`** | Retórica y narrativa ejecutiva de negocio | Cuando se debe traducir un conjunto de datos o resultados de un tablero en un reporte para inversores, junta directiva o QBR, respondiendo con urgencia al *"¿y qué?"* antes de explicar la metodología. |
+
+---
+
+### 3. El Pipeline Integral: Cómo Trabajan en Conjunto
+
+Cuando el proyecto aborda un ciclo de análisis y entrega de tableros de punta a punta, los agentes y habilidades se orquestan en una secuencia de cuatro fases encadenadas:
 
 ```
-          [ Datos en Bruto / Excel ]
-                      │
-                      ▼
-       1. Procesar, limpiar y auditar
-         (sn-da-excel-workflow / xlsx)
-                      │
-                      ▼
-     2. Definir métricas y gobernanza
-  (advanced-analytics-dashboard / kpi-dashboard-design)
-                      │
-                      ▼
-       3. Diseñar y construir el tablero
-       (dashboard-design / data-dashboard)
-                      │
-                      ▼
-     4. Comunicar hallazgos a interesados
-              (data-storytelling)
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              PIPELINE INTEGRAL DE DATOS                                │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+
+  FASE 1: INGESTA Y SANEAMIENTO TÉCNICO
+  [ Archivos Crudos: Excel / CSV / Parquet ]
+         │
+         ├── Agente: data-analyst
+         └── Skills: sn-da-excel-workflow · xlsx
+         │
+         ▼
+  [ Datos Saneados, Auditados y Normalizados ]
+         │
+  FASE 2: GOBERNANZA Y ARQUITECTURA DE KPIs
+         │
+         ├── Skills: advanced-analytics-dashboard · kpi-dashboard-design
+         │   (Selección de 5-7 KPIs SMART + Diccionario con fórmulas y dueños)
+         │
+         ▼
+  [ Catálogo Formal de Métricas y Fuente de Verdad Unificada ]
+         │
+  FASE 3: ARQUITECTURA VISUAL Y CONSOLA SILENCIOSA
+         │
+         ├── Agente: dashboard-designer
+         └── Skills: dashboard-design · data-dashboard
+         │   (Diseño wordless, gráficos SVG nativos, números tabulares y paleta sobria)
+         │
+         ▼
+  [ Tablero Interactivo / Consola de Monitoreo en Producción ]
+         │
+  FASE 4: COMUNICACIÓN ESTRATÉGICA Y STORYTELLING
+         │
+         └── Skill: data-storytelling
+             (Traducción a narrativa de decisiones para directorio / QBR: Setup → Clímax → Acción)
+         │
+         ▼
+  [ Decisiones de Negocio Accionables e Informadas ]
 ```
 
-1. **Ingesta y Limpieza:** Comienza procesando tus planillas con `sn-da-excel-workflow` y `xlsx` para garantizar datos sanos y fórmulas consistentes.
-2. **Estructuración:** Define tus KPIs estratégicos con `kpi-dashboard-design` y documenta su origen con `advanced-analytics-dashboard`.
-3. **Construcción Visual:** Modela el tablero con `dashboard-design` y genera gráficos SVG honestos con `data-dashboard`.
-4. **Presentación Ejecutiva:** Sintetiza los hallazgos en historias de impacto mediante `data-storytelling`.
+#### Descripción Paso a Paso del Flujo Coordinado:
+
+1. **Fase 1 · Ingesta y Limpieza:**
+   El usuario entrega datos brutos o planillas contables/operativas. El agente `data-analyst` ejecuta `sn-da-excel-workflow` para verificar volumen e integridad, saneando nulos y aislando inconsistencias. Si el entregable intermedio exige una planilla ejecutable para finanzas, interviene `xlsx` asegurando fórmulas vivas y consistencia sin errores `#REF!`.
+2. **Fase 2 · Gobernanza de Indicadores:**
+   Con los datos limpios, se define la capa de negocio. `kpi-dashboard-design` selecciona las métricas nucleares para evitar la parálisis por análisis. En paralelo, `advanced-analytics-dashboard` redacta el diccionario formal (fórmulas, periodicidad, metas y responsables), garantizando que no existan discrepancias entre áreas.
+3. **Fase 3 · Maquetación y Visualización Honesta:**
+   El agente `dashboard-designer` toma las métricas catalogadas y aplica las reglas de `dashboard-design`. Diseña una interfaz limpia donde el usuario comprende la situación en menos de 3 segundos sin leer oraciones de texto. Si la pantalla demanda gráficos técnicos de alta velocidad, `data-dashboard` genera el código SVG puro y el modo oscuro contrastado.
+4. **Fase 4 · Presentación y Cierre de Impacto:**
+   Finalmente, los hallazgos y anomalías detectados en el tablero no se entregan como números aislados: `data-storytelling` construye la narrativa ejecutiva, conectando los desvíos del tablero directamente con decisiones de reasignación presupuestaria o prioridades operativas.

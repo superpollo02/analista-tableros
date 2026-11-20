@@ -1,0 +1,112 @@
+{
+  "version": "1.0",
+  "meta": {
+    "titulo": "Pipeline de Datos y Tableros Honestos",
+    "descripcion": "Funcionamiento del pipeline analítico, roles de agentes y arquitectura visual",
+    "formato": "16:9",
+    "estilo": "Pizarra",
+    "subtitulos": "karaoke",
+    "ritmo": 1.35,
+    "cola": 0.8,
+    "paleta": {
+      "--bg": "#1E2A25",
+      "--panel": "#25342E",
+      "--panel-2": "#2C3E36",
+      "--line": "#3E5249",
+      "--glass": "rgba(30,42,37,.85)",
+      "--ink": "#EDEEE6",
+      "--muted": "#9DAAA2",
+      "--accent": "#F5D45E",
+      "--accent-2": "#86CBF5",
+      "--ok": "#A3E29B",
+      "--warn": "#F2948A",
+      "--sub-ink": "#FFFFFF",
+      "--sub-edge": "#141D19",
+      "--track": "rgba(255,255,255,.22)"
+    },
+    "fuentes": {
+      "display": "\"Kalam\",cursive,sans-serif",
+      "body": "\"Atkinson Hyperlegible\",system-ui,sans-serif",
+      "mono": "\"JetBrains Mono\",ui-monospace,monospace",
+      "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&family=Kalam:wght@400;700&display=block"
+    }
+  },
+  "voz": {
+    "engine": "edge-tts",
+    "locutor": "es-AR-TomasNeural",
+    "rate": "-4%",
+    "pitch": "+0Hz",
+    "pausa": 0.6,
+    "say": {
+      "KPI": "K P I",
+      "KPIs": "K P Is",
+      "SVG": "S V G"
+    }
+  },
+  "escenas": [
+    {
+      "id": "problema",
+      "texto": "El ochenta por ciento de los tableros fracasan porque intentan graficar datos rotos o métricas que nadie entiende.",
+      "hablado": "El ochenta por ciento de los tableros fracasan porque intentan graficar datos rotos o métricas que nadie entiende.",
+      "alt": "Planilla caótica con datos rotos y errores",
+      "cam": "F => [[0, 0, 0, 1], [F.at('fracasan'), 0, -2, 1.05]]",
+      "drawCode": "drawBackgroundGrid(F, 0.15);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst p = ease(seg(t, 0, 1));\nconst pFail = ease(seg(t, F.at('fracasan'), F.at('fracasan') + 0.5));\n\n// Planilla de cálculo rota en tiza\nctx.save();\nctx.strokeStyle = C.line;\nctx.lineWidth = 0.6;\nconst w = 70, h = 34, x0 = cx - w / 2, y0 = cy - h / 2 - 4;\nrrect(x0, y0, w, h, 2);\nctx.stroke();\n\n// Filas y columnas de celdas\nfor (let i = 1; i <= 4; i++) line(x0, y0 + (h / 5) * i, x0 + w, y0 + (h / 5) * i);\nfor (let j = 1; j <= 4; j++) line(x0 + (w / 5) * j, y0, x0 + (w / 5) * j, y0 + h);\nctx.restore();\n\n// Celdas caóticas y errores\nif (pFail > 0) {\n  cross(cx - 14, cy - 8, 3.5 * pFail, pFail, C.warn);\n  cross(cx + 14, cy + 2, 3.2 * pFail, pFail, C.warn);\n  txt('#REF!', cx + 14, cy - 8, { size: 2.8, color: C.warn, family: FONT.mono, a: pFail });\n  txt('NULL', cx - 14, cy + 2, { size: 2.8, color: C.muted, family: FONT.mono, a: pFail });\n  bubble(cx + 25, cy - 14, 5 * pFail, '?', C.accent, pFail);\n}\n\n// Sello de fallo\ntxt('80%', cx, cy - 14, { size: 7 * p, color: C.warn, w: 700 });"
+    },
+    {
+      "id": "dos-agentes",
+      "texto": "Para resolverlo, dividimos el trabajo en dos agentes: un analista que audita la matemática y un diseñador que cuida la honestidad visual.",
+      "hablado": "Para resolverlo, dividimos el trabajo en dos agentes: un analista que audita la matemática y un diseñador que cuida la honestidad visual.",
+      "alt": "División de roles entre analista de datos y diseñador de dashboards",
+      "cam": "F => [[0, 0, 0, 1], [F.at('analista'), -15, 0, 1.1], [F.at('diseñador'), 15, 0, 1.1], [F.at('diseñador') + 1.2, 0, 0, 1]]",
+      "drawCode": "drawBackgroundGrid(F, 0.15);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst pLine = ease(seg(t, F.at('dividimos'), F.at('dividimos') + 0.6));\nconst pAna = ease(seg(t, F.at('analista'), F.at('analista') + 0.5));\nconst pDis = ease(seg(t, F.at('diseñador'), F.at('diseñador') + 0.5));\n\n// Línea de tiza central divisoria\nif (pLine > 0) {\n  ctx.save();\n  ctx.strokeStyle = C.accent;\n  ctx.lineWidth = 0.8;\n  ctx.setLineDash([2, 2]);\n  line(cx, cy - 25, cx, cy + 25 * pLine);\n  ctx.restore();\n}\n\n// Lado izquierdo: Data Analyst\nif (pAna > 0) {\n  const xA = cx - 28, yA = cy - 2;\n  person(xA, yA - 6, 7 * pAna, C.accent2, pAna);\n  magnifier(xA + 10, yA - 2, 5 * pAna, pAna);\n  txt('DATA ANALYST', xA, yA + 10, { size: 3.2, color: C.ink, family: FONT.mono, a: pAna, w: 700 });\n  txt('Rigor & Calidad', xA, yA + 14, { size: 2.6, color: C.muted, a: pAna });\n}\n\n// Lado derecho: Dashboard Designer\nif (pDis > 0) {\n  const xD = cx + 28, yD = cy - 2;\n  person(xD, yD - 6, 7 * pDis, C.accent, pDis);\n  laptop(xD, yD + 2, 8 * pDis, pDis, 0.4);\n  txt('DASHBOARD DESIGNER', xD, yD + 10, { size: 3.2, color: C.ink, family: FONT.mono, a: pDis, w: 700 });\n  txt('Data Honesty & UI', xD, yD + 14, { size: 2.6, color: C.muted, a: pDis });\n}"
+    },
+    {
+      "id": "ingesta-limpieza",
+      "texto": "El analista arranca con las planillas crudas, limpiando millones de filas con Parquet y verificando que ninguna fórmula de Excel esté rota.",
+      "hablado": "El analista arranca con las planillas crudas, limpiando millones de filas con Parquet y verificando que ninguna fórmula de Excel esté rota.",
+      "alt": "Embudo de procesamiento y limpieza masiva de datos",
+      "cam": "F => [[0, 0, 0, 1], [F.at('limpiando'), 0, 4, 1.08]]",
+      "drawCode": "drawBackgroundGrid(F, 0.15);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst pRaw = ease(seg(t, 0, 0.8));\nconst pClean = ease(seg(t, F.at('limpiando'), F.at('limpiando') + 0.6));\nconst pOk = ease(seg(t, F.at('rota'), F.at('rota') + 0.5));\n\n// Planillas de entrada\ndoc(cx - 24, cy - 14, 5 * pRaw, pRaw, 4);\ndoc(cx, cy - 16, 5.5 * pRaw, pRaw, 5);\ndoc(cx + 24, cy - 14, 5 * pRaw, pRaw, 4);\n\n// Embudo de procesamiento\nctx.save();\nctx.strokeStyle = C.line;\nctx.lineWidth = 0.8;\nctx.beginPath();\nctx.moveTo(cx - 30, cy - 5);\nctx.lineTo(cx - 8, cy + 8);\nctx.lineTo(cx - 8, cy + 14);\nctx.stroke();\nctx.beginPath();\nctx.moveTo(cx + 30, cy - 5);\nctx.lineTo(cx + 8, cy + 8);\nctx.lineTo(cx + 8, cy + 14);\nctx.stroke();\nctx.restore();\n\n// Bloques Parquet compactos y saneados\nif (pClean > 0) {\n  for (let b = -2; b <= 2; b++) {\n    const bx = cx + b * 11, by = cy + 16;\n    ctx.save();\n    ctx.fillStyle = C.panel2;\n    ctx.strokeStyle = C.accent2;\n    ctx.lineWidth = 0.5;\n    rrect(bx - 4.5, by - 3, 9, 6, 1.2);\n    ctx.fill(); ctx.stroke();\n    ctx.restore();\n  }\n  txt('PARQUET STREAMING', cx, cy + 8, { size: 2.8, color: C.accent2, family: FONT.mono, a: pClean });\n}\n\nif (pOk > 0) {\n  checkBadge(cx + 30, cy + 16, 5 * pOk, pOk);\n}"
+    },
+    {
+      "id": "gobernanza-kpis",
+      "texto": "Después elegimos solo cinco métricas clave. Cada KPI tiene su fórmula exacta, su meta y un dueño responsable para evitar discusiones.",
+      "hablado": "Después elegimos solo cinco métricas clave. Cada K P I tiene su fórmula exacta, su meta y un dueño responsable para evitar discusiones.",
+      "alt": "Selección de 5 métricas clave gobernadas y blindadas",
+      "cam": "F => [[0, 0, 0, 1], [F.at('fórmula'), 0, -1, 1.06]]",
+      "drawCode": "drawBackgroundGrid(F, 0.15);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst pCards = ease(seg(t, F.at('cinco'), F.at('cinco') + 0.6));\nconst pLock = ease(seg(t, F.at('dueño'), F.at('dueño') + 0.5));\n\n// 5 tarjetas de KPI gobernadas\nconst count = 5;\nconst cardW = 12.5, gap = 2.5;\nconst startX = cx - ((count * cardW + (count - 1) * gap) / 2) + cardW / 2;\n\nfor (let i = 0; i < count; i++) {\n  const x = startX + i * (cardW + gap);\n  const y = cy - 2;\n  const delay = i * 0.08;\n  const pI = ease(seg(t, F.at('cinco') + delay, F.at('cinco') + delay + 0.4));\n  if (pI <= 0) continue;\n\n  ctx.save();\n  ctx.fillStyle = C.panel;\n  ctx.strokeStyle = (i === 0) ? C.accent : C.line;\n  ctx.lineWidth = 0.6;\n  rrect(x - cardW / 2, y - 10, cardW, 20, 2);\n  ctx.fill(); ctx.stroke();\n  ctx.restore();\n\n  txt('KPI ' + (i + 1), x, y - 5, { size: 2.6, color: C.accent, family: FONT.mono, a: pI, w: 700 });\n  line(x - cardW * 0.35, y - 1, x + cardW * 0.35, y - 1);\n  txt('f(x)', x, y + 2, { size: 2.2, color: C.muted, family: FONT.mono, a: pI });\n\n  if (pLock > 0) {\n    padlock(x, y + 6, 2.2 * pLock, 1, pLock);\n  }\n}"
+    },
+    {
+      "id": "arquitectura-visual",
+      "texto": "Ahí entra el diseñador: construye una pantalla silenciosa, sin párrafos de relleno, con números tabulares y componentes vectoriales en SVG.",
+      "hablado": "Ahí entra el diseñador: construye una pantalla silenciosa, sin párrafos de relleno, con números tabulares y componentes vectoriales en S V G.",
+      "alt": "Maquetación del dashboard limpio, sin oraciones de relleno",
+      "cam": "F => [[0, 0, 0, 1], [F.at('silenciosa'), 0, 0, 1.08]]",
+      "drawCode": "drawBackgroundGrid(F, 0.15);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst pBuild = ease(seg(t, 0, 0.8));\nconst pSpark = ease(seg(t, F.at('vectoriales'), F.at('vectoriales') + 0.6));\n\n// Carcasa del tablero\nctx.save();\nctx.strokeStyle = C.line;\nctx.fillStyle = C.panel;\nctx.lineWidth = 0.7;\nrrect(cx - 40, cy - 22, 80, 44, 3);\nctx.fill(); ctx.stroke();\n\n// Banda 1: KPIs con números tabulares\nfor (let k = 0; k < 3; k++) {\n  const kx = cx - 26 + k * 26, ky = cy - 13;\n  ctx.fillStyle = C.panel2;\n  rrect(kx - 11, ky - 6, 22, 12, 1.5);\n  ctx.fill();\n  const vals = ['42 850', '98.4%', '2.3k'];\n  txt(vals[k], kx, ky, { size: 3.6 * pBuild, color: C.ink, family: FONT.mono, w: 700 });\n}\n\n// Banda 2: Gráfico vectorial sin relleno de texto\nconst gx = cx - 36, gy = cy + 2, gw = 50, gh = 16;\nctx.strokeStyle = C.line;\nctx.lineWidth = 0.4;\nline(gx, gy + gh, gx + gw, gy + gh);\nline(gx, gy, gx, gy + gh);\n\n// Curva SVG vectorial trazada\nif (pSpark > 0) {\n  ctx.strokeStyle = C.accent2;\n  ctx.lineWidth = 1;\n  ctx.beginPath();\n  const pts = [[0, 12], [10, 9], [20, 11], [30, 4], [40, 6], [50, 2]];\n  pts.forEach(([px, py], idx) => {\n    const x = gx + (px / 50) * gw;\n    const y = gy + (py / 16) * gh;\n    idx === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);\n  });\n  ctx.stroke();\n}\n\n// Panel lateral derecho: Desglose ordenado\nfor (let r = 0; r < 4; r++) {\n  const ry = cy + 4 + r * 3.5;\n  ctx.fillStyle = C.muted;\n  ctx.fillRect(cx + 20, ry, 16 * (1 - r * 0.2) * pBuild, 1.6);\n}\nctx.restore();"
+    },
+    {
+      "id": "data-honesty",
+      "texto": "Nada de ceros falsos ni alertas innecesarias: el color cálido solo se enciende cuando hay un problema real que requiere acción inmediata.",
+      "hablado": "Nada de ceros falsos ni alertas innecesarias: el color cálido solo se enciende cuando hay un problema real que requiere acción inmediata.",
+      "alt": "Principio de Data Honesty y alertas focalizadas accionables",
+      "cam": "F => [[0, 0, 0, 1], [F.at('enciende'), 4, 3, 1.15]]",
+      "drawCode": "drawBackgroundGrid(F, 0.15);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst pNormal = ease(seg(t, 0, 0.6));\nconst pAlert = ease(seg(t, F.at('enciende'), F.at('enciende') + 0.4));\n\n// Gráficos de viñeta (Bullet graphs) honestos\nconst rows = 3;\nfor (let i = 0; i < rows; i++) {\n  const y = cy - 10 + i * 11;\n  const isProblem = (i === 1);\n  \n  // Fondo neutral gris\n  ctx.save();\n  ctx.fillStyle = C.panel;\n  rrect(cx - 36, y - 3.5, 72, 7, 1.5);\n  ctx.fill();\n\n  // Barra de rendimiento\n  const valW = isProblem ? 22 : 46;\n  ctx.fillStyle = (isProblem && pAlert > 0) ? C.warn : C.muted;\n  rrect(cx - 34, y - 2, valW, 4, 1);\n  ctx.fill();\n\n  // Línea de meta (target)\n  ctx.strokeStyle = C.ink;\n  ctx.lineWidth = 0.8;\n  line(cx + 8, y - 3, cx + 8, y + 3);\n\n  // Acción directa en la alerta\n  if (isProblem && pAlert > 0) {\n    ring(cx + 24, y, 4 * pAlert, pAlert, C.accent, 0.8);\n    arrow(cx + 10, y, cx + 20, y, pAlert, C.accent, 0.8);\n    txt('ACT', cx + 24, y, { size: 2.2, color: C.accent, family: FONT.mono, w: 700 });\n  }\n  ctx.restore();\n}"
+    },
+    {
+      "id": "storytelling",
+      "texto": "Finalmente, traducimos las curvas del tablero en una historia concreta para el directorio, respondiendo qué pasó y qué decisión tomar hoy.",
+      "hablado": "Finalmente, traducimos las curvas del tablero en una historia concreta para el directorio, respondiendo qué pasó y qué decisión tomar hoy.",
+      "alt": "Narrativa ejecutiva orientada a la toma de decisiones",
+      "cam": "F => [[0, 0, 0, 1], [F.at('directorio'), 10, 0, 1.1]]",
+      "drawCode": "drawBackgroundGrid(F, 0.15);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst pIn = ease(seg(t, 0, 0.7));\nconst pBoard = ease(seg(t, F.at('directorio'), F.at('directorio') + 0.6));\nconst pCheck = ease(seg(t, F.at('decisión'), F.at('decisión') + 0.5));\n\n// Conector de narrativa (flecha dinámica de la métrica a la decisión)\narrow(cx - 34, cy + 2, cx - 12, cy - 2, pIn, C.accent2, 1);\n\n// Carpeta ejecutiva / Presentación de decisiones\nif (pBoard > 0) {\n  const bx = cx + 14, by = cy - 2;\n  ctx.save();\n  ctx.fillStyle = C.panel;\n  ctx.strokeStyle = C.accent;\n  ctx.lineWidth = 0.7;\n  rrect(bx - 18, by - 14, 36, 28, 2);\n  ctx.fill(); ctx.stroke();\n\n  txt('DECISIÓN EJECUTIVA', bx, by - 9, { size: 2.5, color: C.accent, family: FONT.mono, w: 700 });\n  line(bx - 14, by - 6, bx + 14, by - 6);\n\n  // 3 puntos accionables\n  for (let c = 0; c < 3; c++) {\n    const cyRow = by - 1 + c * 5.5;\n    if (pCheck > 0) check(bx - 10, cyRow, 1.8 * pCheck, pCheck);\n    ctx.fillStyle = C.ink;\n    ctx.fillRect(bx - 6, cyRow - 0.7, 18 * pBoard, 1.4);\n  }\n  ctx.restore();\n}"
+    },
+    {
+      "id": "cierre-pipeline",
+      "texto": "De la planilla caótica a la decisión ejecutiva, en un pipeline transparente donde cada número tiene su razón de ser.",
+      "hablado": "De la planilla caótica a la decisión ejecutiva, en un pipeline transparente donde cada número tiene su razón de ser.",
+      "alt": "Circuito integrado de 4 etapas del pipeline transparente",
+      "cam": "F => [[0, 0, 0, 1], [F.at('pipeline'), 0, 0, 0.95]]",
+      "drawCode": "drawBackgroundGrid(F, 0.2);\nconst A = F.area, cx = A.cx, cy = A.cy;\nconst pFlow = ease(seg(t, 0, 1));\nconst pBadge = ease(seg(t, F.at('transparente'), F.at('transparente') + 0.5));\n\n// 4 estaciones del pipeline continuo\nconst steps = ['INGESTA', 'GOBERNANZA', 'DISEÑO UI', 'DECISIÓN'];\nconst r = 26;\nfor (let s = 0; s < 4; s++) {\n  const ang = (s / 4) * TAU - Math.PI / 2;\n  const sx = cx + Math.cos(ang) * (r * 1.3);\n  const sy = cy + Math.sin(ang) * (r * 0.75);\n\n  ctx.save();\n  ctx.fillStyle = C.panel;\n  ctx.strokeStyle = C.accent;\n  ctx.lineWidth = 0.7;\n  rrect(sx - 11, sy - 5, 22, 10, 2);\n  ctx.fill(); ctx.stroke();\n\n  txt(steps[s], sx, sy, { size: 2.3 * pFlow, color: C.ink, family: FONT.mono, w: 700 });\n  ctx.restore();\n\n  // Flechas entre pasos\n  const nextAng = ((s + 1) / 4) * TAU - Math.PI / 2;\n  const nx = cx + Math.cos(nextAng) * (r * 1.3);\n  const ny = cy + Math.sin(nextAng) * (r * 0.75);\n  arrow(sx, sy, nx, ny, pFlow * 0.6, C.line, 0.6);\n}\n\n// Sello central de Data Honesty y transparencia\nif (pBadge > 0) {\n  checkBadge(cx, cy, 7 * pBadge, pBadge);\n  txt('DATA HONESTY', cx, cy + 9, { size: 2.8, color: C.ok, family: FONT.mono, w: 700, a: pBadge });\n}"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "total": 71.88,
+  "scenes": [
+    {
+      "index": 0,
+      "text": "El ochenta por ciento de los tableros fracasan porque intentan graficar datos rotos o métricas que nadie entiende.",
+      "spoken": "El ochenta por ciento de los tableros fracasan porque intentan graficar datos rotos o métricas que nadie entiende.",
+      "start": 0.0,
+      "dur": 7.296,
+      "audio_dur": 6.696
+    },
+    {
+      "index": 1,
+      "text": "Para resolverlo, dividimos el trabajo en dos agentes: un analista que audita la matemática y un diseñador que cuida la honestidad visual.",
+      "spoken": "Para resolverlo, dividimos el trabajo en dos agentes: un analista que audita la matemática y un diseñador que cuida la honestidad visual.",
+      "start": 7.296,
+      "dur": 9.144,
+      "audio_dur": 8.544
+    },
+    {
+      "index": 2,
+      "text": "El analista arranca con las planillas crudas, limpiando millones de filas con Parquet y verificando que ninguna fórmula de Excel esté rota.",
+      "spoken": "El analista arranca con las planillas crudas, limpiando millones de filas con Parquet y verificando que ninguna fórmula de Excel esté rota.",
+      "start": 16.44,
+      "dur": 8.976,
+      "audio_dur": 8.376
+    },
+    {
+      "index": 3,
+      "text": "Después elegimos solo cinco métricas clave. Cada KPI tiene su fórmula exacta, su meta y un dueño responsable para evitar discusiones.",
+      "spoken": "Después elegimos solo cinco métricas clave. Cada K P I tiene su fórmula exacta, su meta y un dueño responsable para evitar discusiones.",
+      "start": 25.416,
+      "dur": 10.368,
+      "audio_dur": 9.768
+    },
+    {
+      "index": 4,
+      "text": "Ahí entra el diseñador: construye una pantalla silenciosa, sin párrafos de relleno, con números tabulares y componentes vectoriales en SVG.",
+      "spoken": "Ahí entra el diseñador: construye una pantalla silenciosa, sin párrafos de relleno, con números tabulares y componentes vectoriales en S V G.",
+      "start": 35.784,
+      "dur": 10.008,
+      "audio_dur": 9.408
+    },
+    {
+      "index": 5,
+      "text": "Nada de ceros falsos ni alertas innecesarias: el color cálido solo se enciende cuando hay un problema real que requiere acción inmediata.",
+      "spoken": "Nada de ceros falsos ni alertas innecesarias: el color cálido solo se enciende cuando hay un problema real que requiere acción inmediata.",
+      "start": 45.792,
+      "dur": 9.096,
+      "audio_dur": 8.496
+    },
+    {
+      "index": 6,
+      "text": "Finalmente, traducimos las curvas del tablero en una historia concreta para el directorio, respondiendo qué pasó y qué decisión tomar hoy.",
+      "spoken": "Finalmente, traducimos las curvas del tablero en una historia concreta para el directorio, respondiendo qué pasó y qué decisión tomar hoy.",
+      "start": 54.888,
+      "dur": 8.976,
+      "audio_dur": 8.376
+    },
+    {
+      "index": 7,
+      "text": "De la planilla caótica a la decisión ejecutiva, en un pipeline transparente donde cada número tiene su razón de ser.",
+      "spoken": "De la planilla caótica a la decisión ejecutiva, en un pipeline transparente donde cada número tiene su razón de ser.",
+      "start": 63.864,
+      "dur": 8.016,
+      "audio_dur": 7.416
+    }
+  ]
+}

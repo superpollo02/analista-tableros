@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:06,696
+El ochenta por ciento de los tableros fracasan porque intentan graficar datos rotos o métricas que nadie entiende.
+
+2
+00:00:07,296 --> 00:00:15,840
+Para resolverlo, dividimos el trabajo en dos agentes: un analista que audita la matemática y un diseñador que cuida la honestidad visual.
+
+3
+00:00:16,440 --> 00:00:24,816
+El analista arranca con las planillas crudas, limpiando millones de filas con Parquet y verificando que ninguna fórmula de Excel esté rota.
+
+4
+00:00:25,416 --> 00:00:35,184
+Después elegimos solo cinco métricas clave. Cada KPI tiene su fórmula exacta, su meta y un dueño responsable para evitar discusiones.
+
+5
+00:00:35,784 --> 00:00:45,192
+Ahí entra el diseñador: construye una pantalla silenciosa, sin párrafos de relleno, con números tabulares y componentes vectoriales en SVG.
+
+6
+00:00:45,792 --> 00:00:54,288
+Nada de ceros falsos ni alertas innecesarias: el color cálido solo se enciende cuando hay un problema real que requiere acción inmediata.
+
+7
+00:00:54,888 --> 00:01:03,264
+Finalmente, traducimos las curvas del tablero en una historia concreta para el directorio, respondiendo qué pasó y qué decisión tomar hoy.
+
+8
+00:01:03,864 --> 00:01:11,280
+De la planilla caótica a la decisión ejecutiva, en un pipeline transparente donde cada número tiene su razón de ser.
